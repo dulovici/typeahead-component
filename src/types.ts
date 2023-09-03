@@ -1,5 +1,5 @@
 export type Country = {
   name: string;
-  id: string;
+  area: number;
   flag: string;
 };
