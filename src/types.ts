@@ -88,3 +88,7 @@ export type CountryInfo = {
     regex: string;
   };
 };
+
+export type CacheCountryInfo = CountryInfo & {
+  timestamp: number;
+};
