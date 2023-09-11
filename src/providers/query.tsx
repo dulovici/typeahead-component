@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCountry } from "./api";
 
-const cache: { [key: string]: any[] } = {"":[]};
+const cachedDataStr = sessionStorage.getItem("countryCache");
+const cache = cachedDataStr ? JSON.parse(cachedDataStr) : {};
 
 export const useGetCountry = (country: string) => {
   const countryKey = [["country", country]];
@@ -18,7 +19,11 @@ export const useGetCountry = (country: string) => {
     staleTime: STALE_TIME,
   });
 
-  cache[country] = data;
+
+  if (data) {
+    cache[country] = data;
+    sessionStorage.setItem("countryCache", JSON.stringify(cache));
+  }
 
   console.log(cache);
 
