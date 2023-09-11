@@ -1,21 +1,23 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
-import { useGetCountry } from "../providers/query";
-import {  CountryInfo } from "../types";
-import { useDebounce } from "../hooks/useDebounce";
-import CountryFlags from "./CountryFlags";
+import { FC, useState } from "react";
+import {  CountryInfo } from "../../types";
+import { useDebounce } from "../../hooks/useDebounce";
+import PickedCountries from "../PickedCountries";
 
-const TypeAhead = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+interface ITypeAhead {
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  countryData:CountryInfo[];
+}
+
+const TypeAhead: FC<ITypeAhead> = ({setSearchTerm,countryData}) => {
   const [selectedCountries, setSelectedCountries] = useState<CountryInfo[]>([]);
-
-  const { countryData = [] } = useGetCountry(searchTerm);
 
   const debouncedInputChange = useDebounce((term: string) => {
     setSearchTerm(term);
   }, 300);
+  
 
   return (
     <>
@@ -55,7 +57,7 @@ const TypeAhead = () => {
         Send
       </Button>
 
-      <CountryFlags countries={selectedCountries} />
+      <PickedCountries countries={selectedCountries} fullWidth={true}/>
     </>
   );
 };

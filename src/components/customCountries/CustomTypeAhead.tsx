@@ -1,16 +1,17 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
-import { useGetCountry } from "../providers/query";
-import {  CountryInfo } from "../types";
-import { useDebounce } from "../hooks/useDebounce";
-import CountryFlags from "./CountryFlags";
+import { FC, useState } from "react";
+import {  CountryInfo } from "../../types";
+import { useDebounce } from "../../hooks/useDebounce";
+import PickedCountries from "../PickedCountries";
 
-const CustomTypeAhead = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+interface ICustomTypeAhead {
+    setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+    countryData:CountryInfo[];
+  }
+
+const CustomTypeAhead: FC<ICustomTypeAhead> = ({setSearchTerm,countryData}) => {
   const [selectedCountries, setSelectedCountries] = useState<CountryInfo[]>([]);
-
-  const { countryData = [] } = useGetCountry(searchTerm);
 
   const debouncedInputChange = useDebounce((term: string) => {
     setSearchTerm(term);
@@ -25,8 +26,8 @@ const CustomTypeAhead = () => {
   }
 
   const removeSelectedCountry = (countryName:string) => {
-    const newList = selectedCountries.filter((country) => country.name.official !== countryName)
-    setSelectedCountries(newList)
+    const updatedList = selectedCountries.filter((country) => country.name.official !== countryName)
+    setSelectedCountries(updatedList)
   }
   
 
@@ -64,7 +65,7 @@ const CustomTypeAhead = () => {
       </Button>
     </div>
         
-      <CountryFlags countries={selectedCountries} removeSelectedCountry={removeSelectedCountry} />
+      <PickedCountries countries={selectedCountries} removeSelectedCountry={removeSelectedCountry} />
     </div>
   );
 };
