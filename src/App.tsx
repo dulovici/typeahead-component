@@ -2,6 +2,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import TypeAhead from "./components/TypeAhead";
+import CustomTypeAhead from "./components/CustomTypeAhead";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         </a>
       </div>
       <h1>OnPoint Development Exercise</h1>
-      <TypeAhead />
+      {/* <TypeAhead /> */}
+      <CustomTypeAhead />
     </>
   );
 }
