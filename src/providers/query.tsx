@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCountry } from "./api";
+import { CountryInfo } from "../types";
 
 const cachedDataStr = sessionStorage.getItem("countryCache");
 const cache = cachedDataStr ? JSON.parse(cachedDataStr) : {};
@@ -14,7 +15,7 @@ export const useGetCountry = (country: string) => {
     isLoading: countryLoading,
     error: countryError,
     data,
-  } = useQuery<boolean, Error, any>(countryKey, () => getCountry(country), {
+  } = useQuery<boolean, Error, CountryInfo[]>(countryKey, () => getCountry(country), {
     enabled: !!country && !dataCatched,
     staleTime: STALE_TIME,
   });
@@ -25,14 +26,7 @@ export const useGetCountry = (country: string) => {
     sessionStorage.setItem("countryCache", JSON.stringify(cache));
   }
 
-  console.log(cache);
-
-  const countryData = cache[country]?.map((country:any) => ({
-    area: country.area,
-    name: country.name.official,
-    flag: country.flags.png,
-  }));
-
+  const countryData = cache[country];
 
   return {
     countryLoading,

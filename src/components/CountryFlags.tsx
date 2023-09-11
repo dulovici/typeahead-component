@@ -1,18 +1,18 @@
 import { FC } from "react";
-import { Country } from "../types";
+import { CountryInfo } from "../types";
 
 interface ICountryFlags {
-  countries: Country[];
+  countries: CountryInfo[];
 }
 
 const CountryFlags: FC<ICountryFlags> = ({ countries }) => {
   return (
     <div style={{ marginTop: "1rem" }}>
-      {countries.map((country: Country) => {
+      {countries.map((country: CountryInfo) => {
         return (
           <img
             key={country.area}
-            src={country.flag}
+            src={country.flags.png}
             style={{ marginRight: "1rem", width: "10rem" }}
           />
         );

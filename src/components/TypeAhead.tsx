@@ -3,13 +3,13 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { useGetCountry } from "../providers/query";
-import { Country } from "../types";
+import {  CountryInfo } from "../types";
 import { useDebounce } from "../hooks/useDebounce";
 import CountryFlags from "./CountryFlags";
 
 const TypeAhead = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCountries, setSelectedCountries] = useState<Country[]>([]);
+  const [selectedCountries, setSelectedCountries] = useState<CountryInfo[]>([]);
 
   const { countryData = [] } = useGetCountry(searchTerm);
 
@@ -23,12 +23,12 @@ const TypeAhead = () => {
         multiple
         id="tags-standard"
         options={countryData}
-        getOptionLabel={(option) => option.name}
+        getOptionLabel={(option:CountryInfo) => option.name.official}
         onChange={(_, newValue) => {
           setSelectedCountries(newValue);
         }}
         isOptionEqualToValue={(option, value) =>
-          option.name === value.name && option.area === value.area
+          option.name.official === value.name.official && option.area === value.area
         }
         renderInput={(params) => (
           <TextField
