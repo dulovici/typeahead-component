@@ -1,34 +1,37 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCountry } from "./api";
-import { CountryInfo } from "../types";
+import { CacheCountryInfo, CountryInfo } from "../types";
 
 //=============================================================================================
-//**Add time stamp on every entry and stale time as parameter
+//
+const timeStamp = new Date().getTime();
+const STALE_TIME = 9000;
 const cachedDataStr = sessionStorage.getItem("countryCache");
 const cache = cachedDataStr ? JSON.parse(cachedDataStr) : {};
 
 export const useGetCachedCountry = (term: string) => {
   const countryKey = [["country", term]];
-  const STALE_TIME = 0;
+  const cachedEntry = cache[term]  
+  const isDataExpired = cachedEntry && (timeStamp - cachedEntry.timeStamp) > STALE_TIME;
 
-  const dataCatched = cache[term]
-  
   const {
     isLoading: countryLoading,
     error: countryError,
     data,
-  } = useQuery<boolean, Error, CountryInfo[]>(countryKey, () => getCountry(term), {
-    enabled: !!term && !dataCatched,
-    staleTime: STALE_TIME,
+  } = useQuery<boolean, Error, CacheCountryInfo[]>(countryKey, () => getCountry(term), {
+    enabled: !!term && (!cachedEntry || isDataExpired),
+    staleTime: 0,
   });
 
 
   if (data) {
-    cache[term] = data;
+    cache[term] = {data:data, timeStamp: timeStamp};
     sessionStorage.setItem("countryCache", JSON.stringify(cache));
   }
 
-  const countryData = cache[term];
+  const countryData = cache[term]?.data;
+  console.log(cache);
+  
 
   return {
     countryLoading,
@@ -41,8 +44,7 @@ export const useGetCachedCountry = (term: string) => {
 //In this hook i handled caching with react query staleTime API
 export const useGetCountry = (term: string) => {
   const countryKey = [["country", term]];
-  const STALE_TIME = 9000;
-
+  
   const {
     isLoading: countryLoading,
     error: countryError,
@@ -52,10 +54,11 @@ export const useGetCountry = (term: string) => {
     staleTime: STALE_TIME,
   });
 
-
   return {
     countryLoading,
     countryError,
     countryData,
   };
 };
+
+
