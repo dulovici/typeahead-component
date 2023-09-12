@@ -1,6 +1,6 @@
 # typeahead-component
 
-Start project:
-git clone [repo url]
-npm i
-npm run dev
+Start project:<br>
+git clone [repo url]<br>
+npm i<br>
+npm run dev<br>
