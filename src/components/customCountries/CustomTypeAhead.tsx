@@ -34,10 +34,10 @@ const CustomTypeAhead: FC<ICustomTypeAhead> = ({setSearchTerm,countryData}) => {
   return (
     <div style={{display:"flex", justifyContent: "space-between"}}>
 
-    <ul style={{ listStyleType: 'none', width: "33%", cursor: "pointer"}}>
+    <ul style={{ listStyleType: 'none', width: "33%", height: "50vh", overflowY: "auto"}}>
       {countryData.map((country:CountryInfo) => (
         <li key={country.name.official} onClick={() => selectCountry(country)
-        }>{country.name.official}</li>
+        } style={{cursor: "pointer", marginBottom: "2px"}}>{country.name.official}</li>
       ))}
     </ul>
      

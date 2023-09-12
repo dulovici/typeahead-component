@@ -3,6 +3,7 @@ import { getCountry } from "./api";
 import { CacheCountryInfo, CountryInfo } from "../types";
 
 //=============================================================================================
+//
 const cachedDataStr = sessionStorage.getItem("countryCache");
 const cache = cachedDataStr ? JSON.parse(cachedDataStr) : {};
 
@@ -24,7 +25,7 @@ export const useGetCachedCountry = (term: string) => {
   if (data) {
     //I create a timestamp when storing an entry in session storage. 
     //This data can help us in the further development of the function, 
-    //for example, filtering through all cached fields and deleting those that 
+    //for example, we can simulate react query "staleTime" and deleting entries that 
     //are older than a provided number of minutes compared to the timestamp.
     cache[term] = {data:data, timeStamp:new Date().getTime()};
     sessionStorage.setItem("countryCache", JSON.stringify(cache));
