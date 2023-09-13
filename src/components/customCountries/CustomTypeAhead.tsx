@@ -32,16 +32,16 @@ const CustomTypeAhead: FC<ICustomTypeAhead> = ({setSearchTerm,countryData}) => {
   
 
   return (
-    <div style={{display:"flex", justifyContent: "space-between"}}>
+    <div className="flex justify-between">
 
-    <ul style={{ listStyleType: 'none', width: "33%", height: "50vh", overflowY: "auto"}}>
+    <ul className="list-none w-1/3 h-1/2 overflow-y-auto">
       {countryData.map((country:CountryInfo) => (
         <li key={country.name.official} onClick={() => selectCountry(country)
-        } style={{cursor: "pointer", marginBottom: "2px"}}>{country.name.official}</li>
+        } className="cursor-pointer mb-2">{country.name.official}</li>
       ))}
     </ul>
      
-    <div style={{display:"flex", flexDirection:"column", width: "25%"}}>
+    <div className="flex mt-4 flex-col w-1/4">
       <TextField 
       id="outlined-basic" 
       label="Find your country" 

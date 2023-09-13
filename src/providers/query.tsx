@@ -3,7 +3,7 @@ import { getCountry } from "./api";
 import { CacheCountryInfo, CountryInfo } from "../types";
 
 //=============================================================================================
-//
+// HTTP Get with custom caching
 const timeStamp = new Date().getTime();
 const STALE_TIME = 9000;
 const cachedDataStr = sessionStorage.getItem("countryCache");
@@ -30,9 +30,7 @@ export const useGetCachedCountry = (term: string) => {
   }
 
   const countryData = cache[term]?.data;
-  console.log(cache);
   
-
   return {
     countryLoading,
     countryError,

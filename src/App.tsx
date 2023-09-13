@@ -12,7 +12,7 @@ function App() {
   
   return (
     <>
-      <div>
+      <div className="flex justify-center mb-4">
           <a href="https://vitejs.dev" target="_blank">
             <img src={viteLogo} className="logo" alt="Vite logo" />
           </a>
@@ -20,11 +20,11 @@ function App() {
             <img src={reactLogo} className="logo react" alt="React logo" />
           </a>
       </div>
-      <h1>OnPoint Development Exercise</h1>
+      <h1 className="mb-4">OnPoint Development Exercise</h1>
 
-      <div style={{display:"flex", justifyContent: "space-around"}}>
-          <h3 onClick={() => setActiveComponent(TypeAhead.Mui)} style={{cursor:"pointer", color: `${isMUI ? "goldenrod" :""}`}}>MUI Component</h3>
-          <h3 onClick={() => setActiveComponent(TypeAhead.Custom)} style={{cursor:"pointer", color: `${!isMUI ? "goldenrod" :""}`}}>Custom Component</h3>
+      <div className="flex justify-around">
+          <h3 onClick={() => setActiveComponent(TypeAhead.Mui)} className={`cursor-pointer ${isMUI ? 'text-goldenrod' : ''}`}>MUI Component</h3>
+          <h3 onClick={() => setActiveComponent(TypeAhead.Custom)} className={`cursor-pointer ${!isMUI ? 'text-goldenrod' : ''}`}>Custom Component</h3>
       </div>
 
       {activeComponent === TypeAhead.Mui ? <CountryPicker /> : <CustomCountryPicker />}

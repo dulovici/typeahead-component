@@ -8,16 +8,15 @@ interface IPickedCountries {
 }
 
 const PickedCountries: FC<IPickedCountries> = ({ countries,removeSelectedCountry,fullWidth }) => {
-  const style = fullWidth ? {width: "100%", marginTop: "20px"} : {width:"33%"}
   
   return (
-    <div style={style}>
+    <div className={` ${fullWidth ? 'w-full mt-5' : 'w-1/3'}`}>
       {countries.map((country: CountryInfo) => {
         return (
           <img
             key={country.name.official}
             src={country.flags.png}
-            style={{ marginRight: "1rem", width: "10rem", cursor: "pointer" }}
+            className="mr-4 w-40 cursor-pointer"
             onClick={() => removeSelectedCountry && removeSelectedCountry(country.name.official)}
           />
         );
