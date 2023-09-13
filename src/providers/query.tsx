@@ -15,7 +15,7 @@ export const useGetCachedCountry = (term: string) => {
   const isDataExpired = cachedEntry && (timeStamp - cachedEntry.timeStamp) > STALE_TIME;
 
   const {
-    isLoading: countryLoading,
+    isFetching: countryLoading,
     error: countryError,
     data,
   } = useQuery<boolean, Error, CacheCountryInfo[]>(countryKey, () => getCountry(term), {
@@ -44,7 +44,7 @@ export const useGetCountry = (term: string) => {
   const countryKey = [["country", term]];
   
   const {
-    isLoading: countryLoading,
+    isFetching: countryLoading,
     error: countryError,
     data:countryData,
   } = useQuery<boolean, Error, CountryInfo[]>(countryKey, () => getCountry(term), {
