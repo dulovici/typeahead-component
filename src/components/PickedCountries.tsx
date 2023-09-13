@@ -7,25 +7,35 @@ interface IPickedCountries {
   fullWidth?: boolean;
 }
 
-const PickedCountries: FC<IPickedCountries> = ({ countries,removeSelectedCountry,fullWidth }) => {
-  const style = fullWidth ? {width: "100%", marginTop: "20px"} : {width:"33%"}
-  
+const PickedCountries: FC<IPickedCountries> = ({
+  countries,
+  removeSelectedCountry,
+  fullWidth,
+}) => {
   return (
-    <div style={style}>
-      {countries.map((country: CountryInfo) => {
-        return (
-          <img
-            key={country.name.official}
-            src={country.flags.png}
-            style={{ marginRight: "1rem", width: "10rem", cursor: "pointer" }}
-            onClick={() => removeSelectedCountry && removeSelectedCountry(country.name.official)}
-          />
-        );
-      })}
+    <div className={` ${fullWidth ? "w-full mt-5 flex" : "w-1/2"}`}>
+      {!fullWidth && countries.length ? (
+        <p>Click on the flag if you want to remove selected county.</p>
+      ) : null}
+      <div className="flex flex-wrap">
+        {countries.map((country: CountryInfo) => {
+          return (
+            <img
+              key={country.name.official}
+              src={country.flags.png}
+              className={`m-1 w-40 cursor-pointer  ${
+                !fullWidth && "hover:opacity-50"
+              }`}
+              onClick={() =>
+                removeSelectedCountry &&
+                removeSelectedCountry(country.name.official)
+              }
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
-
-
 
 export default PickedCountries;
