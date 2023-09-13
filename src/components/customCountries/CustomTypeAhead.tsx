@@ -19,7 +19,7 @@ const CustomTypeAhead: FC<ICustomTypeAhead> = ({setSearchTerm,countryData}) => {
 
   const selectCountry = (pickedCountry:CountryInfo) => {
     if(selectedCountries.some((country) => country.name.official === pickedCountry.name.official)) {
-        alert("You already pick this country")
+        alert("You already picked this country")
         return
     }
     setSelectedCountries([...selectedCountries,pickedCountry])
@@ -32,39 +32,40 @@ const CustomTypeAhead: FC<ICustomTypeAhead> = ({setSearchTerm,countryData}) => {
   
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between mt-4">
+      <div className="flex mt-4 flex-col w-1/3">
+        <div className="flex flex-col">
+          <TextField 
+          id="outlined-basic" 
+          label="Find your country" 
+          variant="outlined"
+          onChange={(e) => debouncedInputChange(e.target.value)}
+          />
 
-    <ul className="list-none w-1/3 h-1/2 overflow-y-auto">
-      {countryData.map((country:CountryInfo) => (
-        <li key={country.name.official} onClick={() => selectCountry(country)
-        } className="cursor-pointer mb-2">{country.name.official}</li>
-      ))}
-    </ul>
-     
-    <div className="flex mt-4 flex-col w-1/4">
-      <TextField 
-      id="outlined-basic" 
-      label="Find your country" 
-      variant="outlined" 
-      onChange={(e) => debouncedInputChange(e.target.value)}
-      />
+          <ul className="list-none max-h-56 overflow-y-auto">
+            {countryData.map((country:CountryInfo) => (
+              <li key={country.name.official}  onClick={() => selectCountry(country)
+            } className={`cursor-pointer mb-2 ${selectedCountries.includes(country) && "underline"}`}>{country.name.official}</li>
+            ))}
+          </ul>
 
-      <Button
-        style={{ marginTop: "1rem" }}
-        variant="outlined"
-        onClick={() => {
-          alert(
-            selectedCountries.length
-              ? `SENDING FOLLOWING JASON: ${JSON.stringify(selectedCountries)}`
-              : "You need to select some countries"
-          );
-          console.log(selectedCountries);
-        }}
-      >
-        Send
-      </Button>
-    </div>
-        
+          <Button
+          style={{ marginTop: "1rem" }}
+          variant="outlined"
+          onClick={() => {
+            alert(
+              selectedCountries.length
+                ? `SENDING FOLLOWING JSON: ${JSON.stringify(selectedCountries)}`
+                : "You need to select some countries"
+            );
+            console.log(selectedCountries);
+          }}
+        >
+          Send
+        </Button>
+        </div>
+      </div>
+          
       <PickedCountries countries={selectedCountries} removeSelectedCountry={removeSelectedCountry} />
     </div>
   );

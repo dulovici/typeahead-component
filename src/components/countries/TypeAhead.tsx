@@ -48,7 +48,7 @@ const TypeAhead: FC<ITypeAhead> = ({setSearchTerm,countryData}) => {
         onClick={() => {
           alert(
             selectedCountries.length
-              ? `SENDING FOLLOWING JASON: ${JSON.stringify(selectedCountries)}`
+              ? `SENDING FOLLOWING JSON: ${JSON.stringify(selectedCountries)}`
               : "You need to select some countries"
           );
           console.log(selectedCountries);

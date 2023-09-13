@@ -23,8 +23,8 @@ function App() {
       <h1 className="mb-4">OnPoint Development Exercise</h1>
 
       <div className="flex justify-around">
-          <h3 onClick={() => setActiveComponent(TypeAhead.Mui)} className={`cursor-pointer ${isMUI ? 'text-goldenrod' : ''}`}>MUI Component</h3>
-          <h3 onClick={() => setActiveComponent(TypeAhead.Custom)} className={`cursor-pointer ${!isMUI ? 'text-goldenrod' : ''}`}>Custom Component</h3>
+          <h3 onClick={() => setActiveComponent(TypeAhead.Mui)} className={`cursor-pointer ${isMUI ? 'text-amber-700' : ''}`}>MUI Component</h3>
+          <h3 onClick={() => setActiveComponent(TypeAhead.Custom)} className={`cursor-pointer ${!isMUI ? 'text-amber-700' : ''}`}>Custom Component</h3>
       </div>
 
       {activeComponent === TypeAhead.Mui ? <CountryPicker /> : <CustomCountryPicker />}
