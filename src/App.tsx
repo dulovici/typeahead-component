@@ -27,13 +27,13 @@ function App() {
       <div className="flex justify-around">
         <h3
           onClick={() => setActiveComponent(TypeAhead.Mui)}
-          className={`cursor-pointer ${isMUI ? "text-amber-700" : ""}`}
+          className={`cursor-pointer font-bold ${isMUI && "text-amber-700"}`}
         >
           MUI Component
         </h3>
         <h3
           onClick={() => setActiveComponent(TypeAhead.Custom)}
-          className={`cursor-pointer ${!isMUI ? "text-amber-700" : ""}`}
+          className={`cursor-pointer font-bold ${!isMUI && "text-amber-700"}`}
         >
           Custom Component
         </h3>
