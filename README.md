@@ -6,13 +6,11 @@ npm i<br>
 npm run dev<br>
 
 
-## **#Disclamer:<br>**
-
-### API:
+## API:
 Instad of mocking country data, i used free API "https://restcountries.com/" that provide data for all world countries.
 
 
-### Components:
+## Components:
 In component section you will see two folders.<br>
 
 #### countries
@@ -26,7 +24,7 @@ I created this component with custom list and caching functionality.
 
 <br>
 
-## **#Writen questions:<br>**
+## **Writen questions:<br>**
 ### 1. If you had control of the web-server, what are some ways you might implement a caching solution?
 I haven't had the opportunity to work with caching at a deeper level.<br>
 Now, I've encountered this issue for the first time in this task. It's an interesting topic, and I'd would like to discuss it in person if we have an oportunity.
