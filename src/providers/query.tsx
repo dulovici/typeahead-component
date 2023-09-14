@@ -24,6 +24,7 @@ export const useGetCachedCountry = (term: string) => {
     () => getCountry(term),
     {
       enabled: !!term && (!cachedEntry || isDataExpired),
+      retry:2,
       staleTime: 0,
     }
   );
@@ -56,6 +57,7 @@ export const useGetCountry = (term: string) => {
     () => getCountry(term),
     {
       enabled: !!term,
+      retry:2,
       staleTime: STALE_TIME,
     }
   );
